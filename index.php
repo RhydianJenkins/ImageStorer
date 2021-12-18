@@ -5,8 +5,7 @@ use src\Saver;
 use src\Validator;
 
 spl_autoload_register(function ($class) {
-    $baseDir = './src/';
-    $file = $baseDir . $class . '.php';
+    $file = './src/' . $class . '.php';
     if (file_exists($file)) {
         require $file;
     }
