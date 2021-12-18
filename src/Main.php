@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace src;
 
-use App\Interfaces\Savable;
-use App\Interfaces\Validatable;
+use src\Interfaces\Savable;
+use src\Interfaces\Validatable;
 use Psr\Log\LoggerInterface;
 use Logger;
 
@@ -38,7 +38,3 @@ class Main
         return false;
     }
 }
-
-$saver = new Saver();
-$validator = new Validator();
-(new Main($saver, $validator))->saveImage('/tmp/image.jpg');

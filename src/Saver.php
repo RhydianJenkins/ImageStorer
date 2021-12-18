@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace src;
 
-use App\Interfaces\Savable;
+use src\Interfaces\Savable;
 
 class Saver implements Savable
 {

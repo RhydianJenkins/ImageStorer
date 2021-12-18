@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace src;
 
-use App\Interfaces\Validatable;
+use src\Interfaces\Validatable;
 
 class Validator implements Validatable
 {
