@@ -1,4 +1,13 @@
 {
+    "name": "rhydian/image-storer",
+    "description": "A simple image storer CLI tool",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rhydian\\ImageStorer\\": "src/"
+        }
+    },
     "require": {
         "psr/log": "^1.1"
     }
