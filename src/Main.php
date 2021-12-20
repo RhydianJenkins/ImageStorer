@@ -3,9 +3,9 @@
 namespace src;
 
 use src\Interfaces\Validatable;
+use src\Interfaces\ImageIO;
 use Psr\Log\LoggerInterface;
 use Logger;
-use src\Interfaces\ImageIO;
 
 class Main
 {
@@ -24,7 +24,7 @@ class Main
 
     public function saveImage(string $imagePath, string $imageName, string $imageData): bool
     {
-        if ($this->imageValidator->isValid($imagePath)) {
+        if ($this->imageValidator->isValid($imageName)) {
             $success = $this->imageSaver->save($imagePath, $imageName, $imageData);
 
             $success ?
@@ -38,10 +38,10 @@ class Main
         return false;
     }
 
-    public function fetchImage(string $imagePath): string
+    public function fetchImage(string $imagePath, string $imageName): string
     {
-        if ($this->imageValidator->isValid($imagePath)) {
-            return $this->imageSaver->load($imagePath);
+        if ($this->imageValidator->isValid($imagePath . '/' . $imageName)) {
+            return $this->imageSaver->load($imagePath, $imageName);
         }
 
         $this->logger->warning('Image is not valid');
@@ -50,7 +50,7 @@ class Main
 
     public function deleteImage(string $imagePath, string $imageName): bool
     {
-        if ($this->imageValidator->isValid($imagePath)) {
+        if ($this->imageValidator->isValid($imagePath . '/' . $imageName)) {
             $success = $this->imageSaver->delete($imagePath, $imageName);
 
             $success ?

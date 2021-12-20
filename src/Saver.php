@@ -15,12 +15,20 @@ class Saver implements ImageIO
             mkdir($imagePath, 0755);
         }
 
+        if (!is_file($imageName)) {
+            return false;
+        }
+
         return !!(file_put_contents($imagePath . '/' . $imageName, $imageData));
     }
 
-    public function load(string $imagePath): string
+    public function load(string $imagePath, string $imageName): string
     {
-        return file_get_contents($imagePath);
+        if (!is_file($imagePath . '/' . $imageName)) {
+            throw new \Exception('File does not exist');
+        }
+
+        return file_get_contents($imagePath . '/' . $imageName);
     }
 
     public function delete(string $imagePath, string $imageName): bool
