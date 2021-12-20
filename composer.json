@@ -1,14 +1,15 @@
 {
-    "name": "rhydian/image-storer",
+    "name": "rhydianjenkins/image-storer",
     "description": "A simple image storer CLI tool",
     "type": "project",
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "Rhydian\\ImageStorer\\": "src/"
-        }
+        "classmap": [
+            "src/"
+        ]
     },
     "require": {
-        "psr/log": "^1.1"
+        "psr/log": "^1.1",
+        "php": ">=7.4"
     }
 }
