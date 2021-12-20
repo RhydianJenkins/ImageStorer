@@ -22,10 +22,10 @@ class Main
         $this->imageValidator = $imageValidator;
     }
 
-    public function saveImage(string $imagePath): bool
+    public function saveImage(string $imagePath, string $imageName, string $imageData): bool
     {
         if ($this->imageValidator->isValid($imagePath)) {
-            $success = $this->imageSaver->save($imagePath);
+            $success = $this->imageSaver->save($imagePath, $imageName, $imageData);
 
             $success ?
                 $this->logger->info('Image saved successfully') :
@@ -36,5 +36,15 @@ class Main
 
         $this->logger->warning('Image is not valid');
         return false;
+    }
+
+    public function fetchImage(string $imagePath): string
+    {
+        if ($this->imageValidator->isValid($imagePath)) {
+            return $this->imageSaver->load($imagePath);
+        }
+
+        $this->logger->warning('Image is not valid');
+        return '';
     }
 }
