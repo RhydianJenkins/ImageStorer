@@ -2,19 +2,19 @@
 
 namespace src;
 
-use src\Interfaces\Savable;
 use src\Interfaces\Validatable;
 use Psr\Log\LoggerInterface;
 use Logger;
+use src\Interfaces\ImageIO;
 
 class Main
 {
     private LoggerInterface $logger;
-    private Savable $imageSaver;
+    private ImageIO $imageSaver;
     private Validatable $imageValidator;
 
     public function __construct(
-        Savable $imageSaver,
+        ImageIO $imageSaver,
         Validatable $imageValidator
     ) {
         $this->logger = new Logger();
@@ -46,5 +46,21 @@ class Main
 
         $this->logger->warning('Image is not valid');
         return '';
+    }
+
+    public function deleteImage(string $imagePath, string $imageName): bool
+    {
+        if ($this->imageValidator->isValid($imagePath)) {
+            $success = $this->imageSaver->delete($imagePath, $imageName);
+
+            $success ?
+                $this->logger->info('Image deleted successfully') :
+                $this->logger->error('Image could not be deleted');
+
+            return $success;
+        }
+
+        $this->logger->warning('Image is not valid');
+        return false;
     }
 }

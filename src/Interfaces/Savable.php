@@ -11,10 +11,4 @@ interface Savable
      * @return bool true if the image was saved successfully
      */
     public function save(string $imagePath, string $imageName, string $imageData): bool;
-
-    /**
-     * @param string $imagePath The path to the image
-     * @return string The image data
-     */
-    public function load(string $imagePath): string;
 }
